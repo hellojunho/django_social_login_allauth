@@ -1,0 +1,26 @@
+<!-- templates/profile.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>Kakao User Profile</h1>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    
+    {% if user.first_name or user.last_name %}
+        <p><strong>Name:</strong> 
+        {% if user.first_name %}{{ user.first_name }}{% endif %}
+        {% if user.last_name %}{{ user.last_name }}{% endif %}
+        </p>
+    {% else %}
+        <p><strong>Name:</strong> Not Provided</p>
+    {% endif %}
+
+    <h1>Kakao User Profile</h1>
+    <p><strong>Nickname:</strong> {{ user.nickname }}</p>
+</body>
+</html>
