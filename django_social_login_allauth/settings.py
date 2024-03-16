@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +29,8 @@ SECRET_KEY = "django-insecure-_!7rs_#jg*p__2)s8i*cu_fjhy+g33xl8gj_abd3-fb-1o73h9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',
+                 'https://localhost:8000']
 
 
 # Application definition
@@ -45,12 +50,23 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
 
+    # google
     'allauth.socialaccount.providers.google',
+    # facebook
+    'allauth.socialaccount.providers.facebook',
+    # kakao
+    'allauth.socialaccount.providers.kakao',
+    # instagram
+    'allauth.socialaccount.providers.instagram',
+
+    # sslserver
+    'sslserver',
 
     'social',
 ]
 
 SITE_ID = 1
+LOGIN_REDIRECT_URL="/success/"
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -62,7 +78,29 @@ SOCIALACCOUNT_PROVIDERS = {
             'access_type': 'online',
         },
         'OAUTH_PKCE_ENABLED': True,
-    }
+    },
+    'facebook': {
+        'METHOD': 'oauth2',  # Set to 'js_sdk' to use the Facebook connect SDK
+        'SDK_URL': '//connect.facebook.net/{locale}/sdk.js',
+        'SCOPE': ['email', 'public_profile'],
+        'AUTH_PARAMS': {'auth_type': 'reauthenticate'},
+        'INIT_PARAMS': {'cookie': True},
+        'FIELDS': [
+            'id',
+            'first_name',
+            'last_name',
+            'middle_name',
+            'name',
+            'name_format',
+            'picture',
+            'short_name'
+        ],
+        'EXCHANGE_TOKEN': True,
+        'LOCALE_FUNC': lambda request: 'ko_KR',
+        'VERIFIED_EMAIL': False,
+        'VERSION': 'v13.0',
+        'GRAPH_API_URL': 'https://graph.facebook.com/v13.0',
+    },
 }
 
 MIDDLEWARE = [
