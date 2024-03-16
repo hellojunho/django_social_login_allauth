@@ -1,8 +1,29 @@
 # Django의 allauth 라이브러리를 활용한 소셜 로그인 기능 구현
-[django-allauth](https://docs.allauth.org/en/latest/index.html)에 접속해서 `QuickStart`와 `Reqular Accounts/Providers/Provides Sepcitics` 를 참조하자.  
+[django-allauth](https://docs.allauth.org/en/latest/index.html)에 접속해서 `QuickStart`와 `Social Accounts/Providers/Provides Sepcitics` 를 참조하자.  
+
+## 진행과정
+### 가상환경 설정
+```
+python -m venv venv
+source venv/bin/activate
+```
+
+### Django, allauth 설치
+```
+pip install django
+pip install django-allauth
+```
+
+### Django 프로젝트 & 앱 시작하기
+```
+django-admin startproject django_social_login_allauth
+```
+```
+cd django_social_login_allauth
+python manage.py startapp social
+```
 
 ## Google
-
 **settings.py**  
 ```
 INSTALLED_APPS [
