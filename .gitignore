@@ -1,0 +1,5 @@
+.env
+
+django.crt
+
+django.key
